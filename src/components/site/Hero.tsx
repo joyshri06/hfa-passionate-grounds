@@ -42,7 +42,7 @@ export function Hero() {
               alt="Hosur Football & Fitness Academy crest"
               width={160}
               height={160}
-              className="h-28 w-28 drop-shadow-[0_18px_40px_oklch(0.68_0.21_42/0.45)] sm:h-36 sm:w-36"
+              className="h-24 w-24 drop-shadow-[0_18px_40px_oklch(0.68_0.21_42/0.45)] sm:h-28 sm:w-28"
             />
           </Reveal>
 
@@ -54,7 +54,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={160}>
-            <h1 className="mt-6 text-5xl leading-[0.88] text-white sm:text-7xl lg:text-8xl">
+            <h1 className="mt-5 text-5xl leading-[0.88] text-white sm:text-6xl lg:text-7xl">
               One Hosur.
               <br />
               One Passion.
