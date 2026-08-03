@@ -16,13 +16,22 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        flame:
+          "bg-flame text-white shadow-flame transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0",
+        navy: "bg-navy text-white shadow-lift transition-all duration-300 hover:-translate-y-0.5 hover:bg-navy-deep",
+        glass:
+          "surface-glass-dark text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/70 hover:text-gold",
+        gold: "bg-gold text-navy-ink shadow-lift transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
+        pill: "h-13 rounded-full px-8 text-sm font-bold tracking-[0.14em] uppercase",
+        pillSm: "h-11 rounded-full px-6 text-xs font-bold tracking-[0.14em] uppercase",
       },
+
     },
     defaultVariants: {
       variant: "default",
