@@ -23,7 +23,7 @@ export function Hero() {
         width={1920}
         height={1280}
         fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover opacity-70"
+        className="absolute inset-0 h-full w-full object-cover opacity-85"
       />
       <div
         aria-hidden="true"
@@ -34,7 +34,7 @@ export function Hero() {
         className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-background to-transparent"
       />
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 pt-32 pb-24 sm:px-6 lg:pt-40">
+      <div className="relative mx-auto w-full max-w-7xl px-4 pt-28 pb-20 sm:px-6 lg:pt-32">
         <div className="max-w-3xl">
           <Reveal>
             <img
@@ -47,7 +47,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={90}>
-            <p className="mt-8 inline-flex items-center gap-2 rounded-full surface-glass-dark px-4 py-2 text-[0.68rem] font-bold tracking-[0.24em] text-gold uppercase">
+            <p className="mt-6 inline-flex items-center gap-2 rounded-full surface-glass-dark px-4 py-2 text-[0.68rem] font-bold tracking-[0.24em] text-gold uppercase">
               <MapPin className="size-3.5" aria-hidden="true" />
               Established 2018 · Hosur, Tamil Nadu
             </p>
@@ -64,7 +64,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={240}>
-            <p className="mt-7 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
               Elite football and fitness coaching for every age group — technical
               mastery, athletic conditioning and the mindset of a professional,
               built on the grass of our own home ground.
@@ -72,7 +72,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={310}>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="flame" size="pill">
                 <a href="#contact">
                   Join Now <ArrowRight className="size-4" aria-hidden="true" />
@@ -86,7 +86,7 @@ export function Hero() {
         </div>
 
         <Reveal delay={380}>
-          <dl className="mt-16 grid grid-cols-2 gap-3 rounded-[2rem] surface-glass-dark p-5 sm:gap-6 sm:p-7 lg:grid-cols-4">
+          <dl className="mt-10 grid grid-cols-2 gap-3 rounded-[2rem] surface-glass-dark p-5 sm:gap-6 sm:p-7 lg:grid-cols-4">
             {stats.map((stat) => (
               <div key={stat.label} className="min-w-0">
                 <dd className="font-display text-4xl leading-none text-white sm:text-5xl">

@@ -82,7 +82,7 @@ export function About() {
             </div>
             <div className="absolute -bottom-6 left-4 right-4 rounded-3xl bg-navy p-5 shadow-lift sm:left-8 sm:right-auto sm:w-72">
               <p className="font-display text-5xl leading-none text-gold">
-                <Counter to={2018} duration={1200} />
+                2018
               </p>
               <p className="mt-1 text-xs font-bold tracking-[0.2em] text-white/70 uppercase">
                 The year it all kicked off
