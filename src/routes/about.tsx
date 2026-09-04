@@ -56,7 +56,7 @@ const approach = [
 ];
 
 function AboutPage() {
-  const director = coaches[0];
+  const director = coaches[0]!;
 
   return (
     <>
