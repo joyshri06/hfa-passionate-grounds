@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { navLinks } from "@/data/site";
 import logo from "@/assets/hfa-logo.png";
-
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#programs", label: "Programs" },
-  { href: "#coaches", label: "Coaches" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#events", label: "Events" },
-  { href: "#faq", label: "FAQ" },
-];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -23,6 +17,10 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -35,26 +33,29 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled ? "py-2" : "py-4",
+        scrolled ? "py-1.5" : "py-4",
       )}
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <nav
           aria-label="Main"
           className={cn(
-            "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 rounded-full px-4 py-2.5 transition-all duration-500 lg:grid-cols-[auto_1fr_auto] lg:px-5",
+            "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 rounded-full px-4 transition-all duration-500 lg:grid-cols-[auto_1fr_auto] lg:px-5",
             scrolled
-              ? "surface-glass-dark shadow-lift"
-              : "border border-transparent bg-transparent",
+              ? "surface-glass-dark py-2 shadow-lift"
+              : "border border-transparent bg-transparent py-2.5",
           )}
         >
-          <a href="#top" className="flex min-w-0 items-center gap-3">
+          <Link to="/" className="flex min-w-0 items-center gap-3">
             <img
               src={logo}
               alt="Hosur Football & Fitness Academy crest"
               width={44}
               height={44}
-              className="h-10 w-10 shrink-0 drop-shadow-md sm:h-11 sm:w-11"
+              className={cn(
+                "shrink-0 drop-shadow-md transition-all duration-500",
+                scrolled ? "h-9 w-9" : "h-10 w-10 sm:h-11 sm:w-11",
+              )}
             />
             <span className="min-w-0">
               <span className="block truncate font-display text-base leading-none text-white sm:text-lg">
@@ -64,24 +65,26 @@ export function Navbar() {
                 & Fitness Academy
               </span>
             </span>
-          </a>
+          </Link>
 
-          <ul className="hidden items-center justify-center gap-1 lg:flex">
-            {links.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="rounded-full px-4 py-2 text-xs font-bold tracking-[0.14em] text-white/80 uppercase transition-colors hover:bg-white/10 hover:text-gold focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none"
+          <ul className="hidden items-center justify-center gap-0.5 lg:flex">
+            {navLinks.map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  activeOptions={{ exact: link.to === "/" }}
+                  activeProps={{ className: "bg-white/10 text-gold" }}
+                  className="rounded-full px-3 py-2 text-[0.68rem] font-bold tracking-[0.14em] text-white/80 uppercase transition-colors hover:bg-white/10 hover:text-gold focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
           <div className="flex items-center gap-2 justify-self-end">
             <Button asChild variant="flame" size="pillSm" className="hidden sm:inline-flex">
-              <a href="#contact">Join Now</a>
+              <Link to="/registration">Join Now</Link>
             </Button>
             <button
               type="button"
@@ -99,26 +102,34 @@ export function Navbar() {
 
       <div
         id="mobile-menu"
-        hidden={!open}
-        className="mx-4 mt-2 overflow-hidden rounded-3xl surface-glass-dark p-4 shadow-lift lg:hidden"
+        className={cn(
+          "mx-4 overflow-hidden rounded-3xl surface-glass-dark shadow-lift transition-all duration-400 lg:hidden",
+          open
+            ? "mt-2 max-h-[32rem] p-4 opacity-100"
+            : "pointer-events-none mt-0 max-h-0 p-0 opacity-0",
+        )}
       >
         <ul className="flex flex-col">
-          {links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-2xl px-4 py-3 font-display text-lg text-white transition-colors hover:bg-white/10 hover:text-gold"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {[...navLinks, { to: "/testimonials", label: "Testimonials" }, { to: "/faq", label: "FAQ" }].map(
+            (link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  activeOptions={{ exact: link.to === "/" }}
+                  activeProps={{ className: "text-gold" }}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-2xl px-4 py-2.5 font-display text-lg text-white transition-colors hover:bg-white/10 hover:text-gold"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ),
+          )}
         </ul>
         <Button asChild variant="flame" size="pill" className="mt-3 w-full">
-          <a href="#contact" onClick={() => setOpen(false)}>
+          <Link to="/registration" onClick={() => setOpen(false)}>
             Join Now
-          </a>
+          </Link>
         </Button>
       </div>
     </header>

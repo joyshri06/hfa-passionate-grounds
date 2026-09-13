@@ -219,11 +219,97 @@
   transform: none;
 }
 
+/* Page transitions */
+.page-enter {
+  animation: page-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Custom cursor */
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button {
+  cursor: none;
+}
+
+.hfa-cursor-dot,
+.hfa-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hfa-cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--orange);
+}
+
+.hfa-cursor-ring {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in oklab, var(--orange) 70%, transparent);
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.hfa-cursor-action {
+  width: 52px;
+  height: 52px;
+  border-color: var(--gold);
+  background: color-mix(in oklab, var(--gold) 12%, transparent);
+}
+
+.hfa-cursor-view {
+  width: 72px;
+  height: 72px;
+  border-color: transparent;
+  background: color-mix(in oklab, var(--navy-ink) 62%, transparent);
+  backdrop-filter: blur(4px);
+}
+
+.hfa-cursor-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hfa-cursor-view .hfa-cursor-label {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .page-enter {
+    animation: none;
   }
   html {
     scroll-behavior: auto;
