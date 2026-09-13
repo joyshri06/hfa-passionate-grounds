@@ -1,5 +1,4 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -151,11 +150,32 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      font-size: 16.5px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      font-size: 17.5px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    html {
+      font-size: 18.5px;
+    }
   }
 
   body {
@@ -163,6 +183,8 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-width: 320px;
   }
 
   h1,
@@ -178,6 +200,16 @@
     background: var(--orange);
     color: white;
   }
+}
+
+/* Mobile menu slide animation */
+.mobile-menu {
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-menu[data-open="true"] {
+  max-height: 80vh;
 }
 
 @utility surface-glass {

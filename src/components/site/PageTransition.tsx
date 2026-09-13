@@ -1,16 +1,18 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { useRouterState } from "@tanstack/react-router";
+import { useLocation } from "react-router-dom";
 
 export function PageTransition({ children }: { children: ReactNode }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const [key, setKey] = useState(pathname);
+  const { pathname } = useLocation();
+  const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    setKey(pathname);
+    setShown(false);
+    const id = requestAnimationFrame(() => setShown(true));
+    return () => cancelAnimationFrame(id);
   }, [pathname]);
 
   return (
-    <div key={key} className="page-enter">
+    <div key={pathname} className="page-transition" data-shown={shown}>
       {children}
     </div>
   );

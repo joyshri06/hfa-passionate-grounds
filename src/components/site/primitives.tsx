@@ -105,24 +105,24 @@ export function SectionHeading({
   return (
     <Reveal
       className={cn(
-        "max-w-2xl",
+        "max-w-4xl",
         align === "center" && "mx-auto text-center",
       )}
     >
       <span
         className={cn(
-          "inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[0.7rem] font-bold tracking-[0.22em] uppercase",
+          "inline-flex items-center gap-2.5 rounded-full px-5 py-2 text-xs sm:text-sm font-extrabold tracking-[0.26em] uppercase shadow-sm",
           tone === "light"
             ? "bg-secondary text-navy"
             : "surface-glass-dark text-gold",
         )}
       >
-        <span className="h-1.5 w-1.5 rounded-full bg-orange" aria-hidden="true" />
+        <span className="h-2 w-2 rounded-full bg-orange" aria-hidden="true" />
         {eyebrow}
       </span>
       <h2
         className={cn(
-          "mt-5 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl",
+          "mt-6 text-[clamp(1.85rem,4.5vw,4rem)] leading-[0.9] font-display font-extrabold tracking-tight",
           tone === "light" ? "text-navy" : "text-background",
         )}
       >
@@ -131,8 +131,8 @@ export function SectionHeading({
       {description ? (
         <p
           className={cn(
-            "mt-5 text-base leading-relaxed sm:text-lg",
-            tone === "light" ? "text-muted-foreground" : "text-background/70",
+            "mt-5 text-base leading-relaxed sm:text-lg xl:text-xl font-medium",
+            tone === "light" ? "text-muted-foreground" : "text-background/80",
           )}
         >
           {description}
