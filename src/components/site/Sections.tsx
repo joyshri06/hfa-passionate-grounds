@@ -1,32 +1,35 @@
-import {
-  Activity,
-  Award,
-  CalendarDays,
-  Dumbbell,
-  HeartPulse,
-  Medal,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  Target,
-  Trophy,
-  Users,
-} from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Counter, Reveal, SectionHeading } from "./primitives";
+import {
+  achievements,
+  coaches,
+  events,
+  galleryImages,
+  honours,
+  missionVision,
+  pillars,
+  programs,
+} from "@/data/site";
 import g1 from "@/assets/gallery-1.jpg";
-import g2 from "@/assets/gallery-2.jpg";
-import g3 from "@/assets/gallery-3.jpg";
-import g4 from "@/assets/gallery-4.jpg";
 
-export const galleryImages = [
-  { src: g1, alt: "Academy players running a cone dribbling drill at sunset" },
-  { src: g2, alt: "Coach briefing the squad in a huddle before training" },
-  { src: g3, alt: "Junior team celebrating with a championship trophy" },
-  { src: g4, alt: "Close-up of a boot striking the ball under floodlights" },
-];
+function MoreLink({ to, label }: { to: string; label: string }) {
+  return (
+    <Reveal delay={120}>
+      <div className="mt-12 text-center">
+        <Button asChild variant="flame" size="pill">
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          <Link to={to as any}>
+            {label} <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+        </Button>
+      </div>
+    </Reveal>
+  );
+}
 
-export function About() {
+export function About({ preview = false }: { preview?: boolean }) {
   return (
     <section id="about" className="relative py-24 sm:py-32">
       <div className="mx-auto grid w-full max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
@@ -43,18 +46,7 @@ export function About() {
             description="Hosur Football & Fitness Academy started in 2018 with a handful of kids, two goalposts and one belief — that world-class football education belongs right here at home. Today we train hundreds of players across age groups with a curriculum that blends technique, strength and character."
           />
           <div className="mt-9 grid gap-4 sm:grid-cols-2">
-            {[
-              {
-                icon: Target,
-                title: "Our Mission",
-                text: "Develop complete athletes — skilled, fit, disciplined and confident on and off the pitch.",
-              },
-              {
-                icon: Sparkles,
-                title: "Our Vision",
-                text: "Put Hosur on the national football map by producing players for state and pro academies.",
-              },
-            ].map((item, i) => (
+            {missionVision.map((item, i) => (
               <Reveal key={item.title} delay={i * 100}>
                 <div className="h-full rounded-3xl border border-border bg-card p-6 shadow-lift transition-transform duration-300 hover:-translate-y-1">
                   <item.icon className="size-6 text-orange" aria-hidden="true" />
@@ -66,6 +58,17 @@ export function About() {
               </Reveal>
             ))}
           </div>
+          {preview ? (
+            <Reveal delay={180}>
+              <div className="mt-8">
+                <Button asChild variant="navy" size="pill">
+                  <Link to="/about">
+                    Explore our story <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </div>
+            </Reveal>
+          ) : null}
         </div>
 
         <Reveal delay={120}>
@@ -81,9 +84,7 @@ export function About() {
               />
             </div>
             <div className="absolute -bottom-6 left-4 right-4 rounded-3xl bg-navy p-5 shadow-lift sm:left-8 sm:right-auto sm:w-72">
-              <p className="font-display text-5xl leading-none text-gold">
-                2018
-              </p>
+              <p className="font-display text-5xl leading-none text-gold">2018</p>
               <p className="mt-1 text-xs font-bold tracking-[0.2em] text-white/70 uppercase">
                 The year it all kicked off
               </p>
@@ -95,46 +96,16 @@ export function About() {
   );
 }
 
-const programs = [
-  {
-    icon: Star,
-    name: "Little Kickers",
-    age: "Age 5 – 8",
-    text: "Fun-first introduction to football: coordination, balance, first touch and love for the ball.",
-  },
-  {
-    icon: Activity,
-    name: "Development Squad",
-    age: "Age 9 – 13",
-    text: "Technical foundations, small-sided games and positional understanding with weekly match play.",
-  },
-  {
-    icon: Trophy,
-    name: "Elite Youth",
-    age: "Age 14 – 18",
-    text: "High-performance training, tactical periodisation and scouting exposure for district & state trials.",
-  },
-  {
-    icon: Dumbbell,
-    name: "Strength & Fitness",
-    age: "All ages",
-    text: "Sports-science-led conditioning, speed and agility, mobility and injury-prevention programming.",
-  },
-  {
-    icon: ShieldCheck,
-    name: "Goalkeeper Lab",
-    age: "Age 10+",
-    text: "Specialist handling, shot-stopping, distribution and reflex work with a dedicated GK coach.",
-  },
-  {
-    icon: HeartPulse,
-    name: "Adult Fitness Football",
-    age: "Age 18+",
-    text: "Evening sessions for working adults — cardio, conditioning and competitive 7-a-side.",
-  },
-];
-
-export function Programs() {
+export function Programs({
+  limit,
+  preview = false,
+  showSchedule = false,
+}: {
+  limit?: number;
+  preview?: boolean;
+  showSchedule?: boolean;
+}) {
+  const list = limit ? programs.slice(0, limit) : programs;
   return (
     <section id="programs" className="relative overflow-hidden bg-pitch py-24 sm:py-32">
       <div
@@ -147,10 +118,10 @@ export function Programs() {
           align="center"
           eyebrow="Programs"
           title={<>Pathways for every player</>}
-          description="Structured age-group curricula designed by UEFA/AIFF-licensed coaches, progressing from first touch to first trial."
+          description="Structured age-group curricula designed by licensed coaches, progressing from first touch to first trial."
         />
         <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {programs.map((program, i) => (
+          {list.map((program, i) => (
             <Reveal as="li" key={program.name} delay={(i % 3) * 90}>
               <article className="group h-full rounded-[1.75rem] surface-glass-dark p-7 transition-all duration-400 hover:-translate-y-1.5 hover:border-gold/50">
                 <span className="grid size-12 place-items-center rounded-2xl bg-flame text-white shadow-flame">
@@ -161,54 +132,32 @@ export function Programs() {
                 </p>
                 <h3 className="mt-2 text-2xl text-white">{program.name}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/70">{program.text}</p>
+                {showSchedule ? (
+                  <dl className="mt-5 space-y-2 border-t border-white/10 pt-4 text-xs text-white/70">
+                    <div className="flex justify-between gap-3">
+                      <dt className="font-bold tracking-[0.16em] uppercase text-white/50">
+                        Schedule
+                      </dt>
+                      <dd className="text-right">{program.schedule}</dd>
+                    </div>
+                    <div className="flex justify-between gap-3">
+                      <dt className="font-bold tracking-[0.16em] uppercase text-white/50">Fees</dt>
+                      <dd className="text-right text-gold">{program.fee}</dd>
+                    </div>
+                  </dl>
+                ) : null}
               </article>
             </Reveal>
           ))}
         </ul>
-        <Reveal delay={120}>
-          <div className="mt-12 text-center">
-            <Button asChild variant="gold" size="pill">
-              <a href="#contact">Book a free trial session</a>
-            </Button>
-          </div>
-        </Reveal>
+        <MoreLink
+          to={preview ? "/programs" : "/registration"}
+          label={preview ? "View all programs" : "Register now"}
+        />
       </div>
     </section>
   );
 }
-
-const reasons = [
-  {
-    icon: Users,
-    title: "1 : 12 coach ratio",
-    text: "Small groups mean every player gets corrected, coached and challenged in every session.",
-  },
-  {
-    icon: Medal,
-    title: "Licensed coaching staff",
-    text: "AIFF-certified coaches with grassroots, youth and professional playing backgrounds.",
-  },
-  {
-    icon: HeartPulse,
-    title: "Fitness science built in",
-    text: "Strength, mobility and recovery work integrated into the football curriculum, not bolted on.",
-  },
-  {
-    icon: CalendarDays,
-    title: "Year-round match play",
-    text: "Inter-academy leagues, district tournaments and friendlies keep players competing all season.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Safe, certified ground",
-    text: "Well-maintained turf, first-aid trained staff and strict child-safeguarding protocols.",
-  },
-  {
-    icon: Award,
-    title: "A real pathway",
-    text: "Trial exposure, highlight reels and references for state academies and college programmes.",
-  },
-];
 
 export function WhyChooseUs() {
   return (
@@ -224,7 +173,7 @@ export function WhyChooseUs() {
           description="Every session is planned, measured and reviewed. Nothing about your child's development is left to chance."
         />
         <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((reason, i) => (
+          {pillars.map((reason, i) => (
             <Reveal as="li" key={reason.title} delay={(i % 3) * 90}>
               <div className="group relative h-full overflow-hidden rounded-[1.75rem] border border-border bg-card p-7 shadow-lift transition-all duration-400 hover:-translate-y-1.5">
                 <span
@@ -245,34 +194,13 @@ export function WhyChooseUs() {
   );
 }
 
-const coaches = [
-  {
-    name: "Arun Kumar",
-    role: "Founder & Head Coach",
-    initials: "AK",
-    bio: "AIFF D-Licence. Former district captain. Leads the elite youth pathway.",
-  },
-  {
-    name: "Vignesh R.",
-    role: "Technical Coach",
-    initials: "VR",
-    bio: "Specialist in ball mastery and 1v1 development for the 9–13 age group.",
-  },
-  {
-    name: "Sathish M.",
-    role: "Strength & Conditioning",
-    initials: "SM",
-    bio: "Sports science graduate handling athletic development and rehab.",
-  },
-  {
-    name: "Prakash D.",
-    role: "Goalkeeping Coach",
-    initials: "PD",
-    bio: "Ex-state keeper running the dedicated Goalkeeper Lab sessions.",
-  },
-];
-
-export function Coaches() {
+export function Coaches({
+  preview = false,
+  detailed = false,
+}: {
+  preview?: boolean;
+  detailed?: boolean;
+}) {
   return (
     <section id="coaches" className="bg-secondary py-24 sm:py-32">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
@@ -293,16 +221,33 @@ export function Coaches() {
                   {coach.role}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{coach.bio}</p>
+                {detailed ? (
+                  <dl className="mt-5 space-y-2 border-t border-border pt-4 text-left text-xs text-muted-foreground">
+                    <div>
+                      <dt className="font-bold tracking-[0.16em] text-navy uppercase">
+                        Experience
+                      </dt>
+                      <dd className="mt-1">{coach.experience}</dd>
+                    </div>
+                    <div>
+                      <dt className="font-bold tracking-[0.16em] text-navy uppercase">
+                        Specialisation
+                      </dt>
+                      <dd className="mt-1">{coach.specialisation}</dd>
+                    </div>
+                  </dl>
+                ) : null}
               </article>
             </Reveal>
           ))}
         </ul>
+        {preview ? <MoreLink to="/coaches" label="Meet the team" /> : null}
       </div>
     </section>
   );
 }
 
-export function Gallery() {
+export function GalleryPreview() {
   return (
     <section id="gallery" className="py-24 sm:py-32">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
@@ -337,26 +282,19 @@ export function Gallery() {
             </Reveal>
           ))}
         </div>
+        <MoreLink to="/gallery" label="View full gallery" />
       </div>
     </section>
   );
 }
 
-const achievements = [
-  { value: 25, suffix: "+", label: "Tournament trophies" },
-  { value: 40, suffix: "+", label: "District selections" },
-  { value: 9, suffix: "", label: "State-level players" },
-  { value: 500, suffix: "+", label: "Academy alumni" },
-];
-
-const honours = [
-  { year: "2024", title: "Hosur District Youth League — Champions (U-15)" },
-  { year: "2023", title: "Krishnagiri Inter-Academy Cup — Runners-up (U-13)" },
-  { year: "2022", title: "TN Grassroots Festival — Best Academy Award" },
-  { year: "2021", title: "Hosur Super Cup — Champions (U-17)" },
-];
-
-export function Achievements() {
+export function Achievements({
+  preview = false,
+  timeline = false,
+}: {
+  preview?: boolean;
+  timeline?: boolean;
+}) {
   return (
     <section id="achievements" className="relative overflow-hidden bg-pitch py-24 sm:py-32">
       <div
@@ -389,48 +327,44 @@ export function Achievements() {
           ))}
         </dl>
 
-        <ul className="mt-12 grid gap-3 sm:grid-cols-2">
-          {honours.map((honour, i) => (
-            <Reveal as="li" key={honour.title} delay={(i % 2) * 90}>
-              <div className="flex min-w-0 items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition-colors hover:border-gold/50">
-                <Trophy className="size-5 shrink-0 text-gold" aria-hidden="true" />
-                <p className="min-w-0 text-sm text-white/85">
-                  <span className="font-display mr-2 text-gold">{honour.year}</span>
-                  {honour.title}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
+        {timeline ? (
+          <ol className="relative mt-14 ml-3 border-l border-white/15 pl-6">
+            {honours.map((honour, i) => (
+              <Reveal as="li" key={honour.title} delay={i * 80} className="relative pb-8 last:pb-0">
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-[2.1rem] top-1.5 grid size-6 place-items-center rounded-full bg-flame shadow-flame"
+                >
+                  <Trophy className="size-3 text-white" />
+                </span>
+                <p className="font-display text-2xl text-gold">{honour.year}</p>
+                <p className="mt-1 text-sm text-white/80">{honour.title}</p>
+              </Reveal>
+            ))}
+          </ol>
+        ) : (
+          <ul className="mt-12 grid gap-3 sm:grid-cols-2">
+            {honours.map((honour, i) => (
+              <Reveal as="li" key={honour.title} delay={(i % 2) * 90}>
+                <div className="flex min-w-0 items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition-colors hover:border-gold/50">
+                  <Trophy className="size-5 shrink-0 text-gold" aria-hidden="true" />
+                  <p className="min-w-0 text-sm text-white/85">
+                    <span className="font-display mr-2 text-gold">{honour.year}</span>
+                    {honour.title}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </ul>
+        )}
+
+        {preview ? <MoreLink to="/achievements" label="View all achievements" /> : null}
       </div>
     </section>
   );
 }
 
-const events = [
-  {
-    date: "24 Aug",
-    title: "Open Trials — U-13 & U-15",
-    detail: "7:00 AM · HFA Ground, Hosur. Free entry, register in advance.",
-  },
-  {
-    date: "07 Sep",
-    title: "HFA Monsoon Cup 2026",
-    detail: "Two-day inter-academy tournament across four age categories.",
-  },
-  {
-    date: "19 Oct",
-    title: "Goalkeeper Masterclass",
-    detail: "Half-day specialist clinic with guest state-level keepers.",
-  },
-  {
-    date: "15 Nov",
-    title: "Parents' Match Day & Awards",
-    detail: "Season showcase, family 7s and the annual academy awards night.",
-  },
-];
-
-export function Events() {
+export function Events({ preview = false }: { preview?: boolean }) {
   return (
     <section id="events" className="py-24 sm:py-32">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
@@ -448,6 +382,9 @@ export function Events() {
                 </span>
                 <div className="min-w-0">
                   <h3 className="truncate text-lg text-navy sm:text-xl">{event.title}</h3>
+                  <p className="mt-1 text-[0.66rem] font-bold tracking-[0.18em] text-orange uppercase">
+                    {event.location}
+                  </p>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                     {event.detail}
                   </p>
@@ -456,6 +393,63 @@ export function Events() {
             </Reveal>
           ))}
         </ul>
+        {preview ? <MoreLink to="/events" label="See all events" /> : null}
+      </div>
+    </section>
+  );
+}
+
+export function StatsBand() {
+  return (
+    <section className="bg-navy py-16">
+      <dl className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-6 px-4 sm:px-6 lg:grid-cols-4">
+        {achievements.map((item, i) => (
+          <Reveal key={item.label} delay={i * 80}>
+            <div className="text-center">
+              <dd className="font-display text-4xl leading-none text-gold sm:text-5xl">
+                <Counter to={item.value} suffix={item.suffix} />
+              </dd>
+              <dt className="mt-2 text-[0.66rem] font-bold tracking-[0.18em] text-white/60 uppercase">
+                {item.label}
+              </dt>
+            </div>
+          </Reveal>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+export function CtaBand() {
+  return (
+    <section className="py-20 sm:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-pitch p-10 text-center shadow-lift sm:p-16">
+            <div
+              aria-hidden="true"
+              className="absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-orange/25 blur-3xl"
+            />
+            <div className="relative">
+              <h2 className="text-4xl leading-[0.95] text-white sm:text-5xl">
+                Your first session is <span className="text-flame">free</span>
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-base text-white/75">
+                Register today and we'll confirm a trial slot with the right age-group coach.
+              </p>
+              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                <Button asChild variant="flame" size="pill">
+                  <Link to="/registration">
+                    Register now <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+                <Button asChild variant="glass" size="pill">
+                  <Link to="/contact">Contact us</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
