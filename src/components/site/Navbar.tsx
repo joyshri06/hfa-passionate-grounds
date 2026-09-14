@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { NAV_LINKS } from "@/lib/site-data";
+import { NAV_LINKS } from "@/data/site";
 import logo from "@/assets/hfa-logo.png";
 
 export function Navbar() {

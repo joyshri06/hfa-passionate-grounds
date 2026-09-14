@@ -1,6 +1,6 @@
 import { PageHero } from "@/components/site/PageHero";
 import { Achievements } from "@/components/site/Sections";
-import { playerHonours } from "@/lib/site-data";
+import { playerHonours } from "@/data/site";
 import { Reveal, SectionHeading } from "@/components/site/primitives";
 import { Award, CheckCircle2 } from "lucide-react";
 

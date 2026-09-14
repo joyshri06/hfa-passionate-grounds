@@ -19,6 +19,7 @@ import g4 from "@/assets/gallery-4.jpg";
 
 export const WHATSAPP_NUMBER = "919876543210";
 export const PHONE_DISPLAY = "+91 98765 43210";
+export const PHONE_HREF = "tel:+919876543210";
 export const EMAIL = "hello@hosurfootballacademy.in";
 export const MAPS_QUERY = "Hosur+Football+Academy+Hosur+Tamil+Nadu";
 
@@ -26,7 +27,9 @@ export const SOCIALS = {
   instagram: "https://www.instagram.com/hosurfootballacademy",
   facebook: "https://www.facebook.com/hosurfootballacademy",
   youtube: "https://www.youtube.com/@hosurfootballacademy",
+  whatsapp: `https://wa.me/${WHATSAPP_NUMBER}`,
 };
+export const SOCIAL = SOCIALS;
 
 export const navLinks = [
   { to: "/", label: "Home" },
@@ -40,6 +43,7 @@ export const navLinks = [
   { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ] as const;
+export const NAV_LINKS = navLinks;
 
 export const galleryImages = [
   {
@@ -212,11 +216,19 @@ export const achievements = [
   { value: 500, suffix: "+", label: "Academy alumni" },
 ];
 
+export const programPillars = pillars;
+
 export const honours = [
   { year: "2024", title: "Hosur District Youth League — Champions (U-15)" },
   { year: "2023", title: "Krishnagiri Inter-Academy Cup — Runners-up (U-13)" },
   { year: "2022", title: "TN Grassroots Festival — Best Academy Award" },
   { year: "2021", title: "Hosur Super Cup — Champions (U-17)" },
+];
+
+export const playerHonours = [
+  "2 Players selected for Tamil Nadu State Youth Team (2024)",
+  "5 Players selected for Krishnagiri District Squad (2023–24)",
+  "Best Grassroots Academy Award — TN Football Association (2022)",
 ];
 
 export const events = [

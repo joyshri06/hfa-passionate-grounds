@@ -1,6 +1,6 @@
 import { PageHero } from "@/components/site/PageHero";
 import { Programs } from "@/components/site/Sections";
-import { programPillars } from "@/lib/site-data";
+import { programPillars } from "@/data/site";
 import { Reveal, SectionHeading } from "@/components/site/primitives";
 
 export function ProgramsPage() {

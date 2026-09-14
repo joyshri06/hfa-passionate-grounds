@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Button } from "@/components/ui/button";
-import { WHATSAPP_NUMBER } from "@/lib/site-data";
+import { WHATSAPP_NUMBER } from "@/data/site";
 import { Reveal } from "@/components/site/primitives";
 
 export function RegistrationPage() {

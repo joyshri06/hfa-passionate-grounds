@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PageHero } from "@/components/site/PageHero";
-import { galleryImages, galleryCategories } from "@/lib/site-data";
+import { galleryImages, galleryCategories } from "@/data/site";
 import { Reveal } from "@/components/site/primitives";
 import { cn } from "@/lib/utils";
 

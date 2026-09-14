@@ -6,7 +6,7 @@ import {
   PHONE_HREF,
   SOCIAL,
   programs,
-} from "@/lib/site-data";
+} from "@/data/site";
 import logo from "@/assets/hfa-logo.png";
 
 const quickLinks = [
