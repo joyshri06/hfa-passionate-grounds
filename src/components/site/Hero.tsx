@@ -18,32 +18,26 @@ export function Hero() {
       id="top"
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-navy-ink"
     >
-      {/* Full-bleed stadium background */}
+      {/* Full-bleed stadium background with enhanced visibility */}
       <img
         src={hero}
         alt="Floodlit football stadium at dusk"
         width={1920}
         height={1280}
         fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover opacity-80"
+        className="absolute inset-0 h-full w-full object-cover opacity-90"
       />
 
-      {/* Left-weighted directional gradient: dark on left (content), open on right (stadium) */}
+      {/* Cinematic directional gradient: clear readability on left, vibrant floodlights glowing on right */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(105deg,oklch(0.16_0.05_262/0.97)_0%,oklch(0.16_0.05_262/0.88)_38%,oklch(0.16_0.05_262/0.45)_62%,oklch(0.16_0.05_262/0.12)_100%)]"
-      />
-
-      {/* Bottom fade */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background to-transparent"
+        className="absolute inset-0 bg-[linear-gradient(105deg,oklch(0.16_0.05_262/0.78)_0%,oklch(0.16_0.05_262/0.58)_38%,oklch(0.16_0.05_262/0.28)_68%,oklch(0.16_0.05_262/0.08)_100%)]"
       />
 
       {/* Constrained layout container */}
       <div className="relative mx-auto w-full max-w-[1380px] px-4 sm:px-8 lg:px-16 xl:px-20 pt-24 sm:pt-28 lg:pt-36 pb-8 lg:pb-14">
 
-        {/* Hero content — left column on desktop (≈50% wide), full width on mobile */}
+        {/* Hero content — left column on desktop (≈54% wide), full width on mobile */}
         <div className="w-full lg:max-w-[54%]">
           <Reveal>
             <img
@@ -63,7 +57,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={150}>
-            <h1 className="mt-4 font-display font-extrabold tracking-tight leading-[0.9] text-white text-[clamp(2.1rem,5.5vw,4.5rem)]">
+            <h1 className="mt-4 font-display font-extrabold tracking-[0.02em] leading-[1.06] text-white text-[clamp(2.4rem,5.5vw,4.85rem)]">
               One Hosur.
               <br />
               One Passion.
@@ -135,3 +129,4 @@ export function Hero() {
     </section>
   );
 }
+

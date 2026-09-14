@@ -19,7 +19,7 @@ export function useInView<T extends HTMLElement>(once = true) {
           }
         }
       },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px 40px 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -122,7 +122,7 @@ export function SectionHeading({
       </span>
       <h2
         className={cn(
-          "mt-6 text-[clamp(1.85rem,4.5vw,4rem)] leading-[0.9] font-display font-extrabold tracking-tight",
+          "mt-6 text-[clamp(1.85rem,4.5vw,3.75rem)] leading-[1.08] font-display font-extrabold tracking-[0.02em]",
           tone === "light" ? "text-navy" : "text-background",
         )}
       >

@@ -43,10 +43,6 @@ export function PageHero({
           accent === "flame" ? "right-10 bg-orange/25" : "left-10 bg-gold/20",
         )}
       />
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background to-transparent"
-      />
 
       <div
         className={cn(
@@ -82,7 +78,7 @@ export function PageHero({
         <Reveal delay={130}>
           <h1
             className={cn(
-              "mt-6 text-[clamp(2.1rem,5vw,4.25rem)] leading-[0.88] text-white font-display font-extrabold tracking-tight",
+              "mt-6 text-[clamp(2.1rem,5vw,4.25rem)] leading-[1.08] text-white font-display font-extrabold tracking-[0.02em]",
               align === "center" && "mx-auto",
             )}
           >
